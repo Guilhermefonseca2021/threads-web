@@ -6,3 +6,16 @@
   margin: 0;
   padding: 0;
 }
+
+.icon-container {
+  border-radius: 50%;
+  padding: 8px;
+  width: 2.4rem;
+  height: 2.4rem;
+  transition: all .4s ease-in-out;
+}
+
+.icon-container:hover {
+  background-color: #1e1e1e;
+  color: white;
+}
