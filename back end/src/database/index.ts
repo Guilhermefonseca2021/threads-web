@@ -8,7 +8,9 @@ const connectDatabase = async () => {
     } catch(err) {
         console.log(err)
     }
-  
 };
 
 export default connectDatabase;
+
+import { Schema, model, Types } from 'mongoose';
+

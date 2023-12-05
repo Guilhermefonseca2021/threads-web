@@ -1,20 +1,16 @@
 import express, { Request, Response } from "express";
 import connect from "./config/connect";
-import cors from 'cors';
-import cookieParser from 'cookie-parser'
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import connectDatabase from "./database";
-import routes from "./routes/UserRoutes"; 
+import routes from "./routes/UserRoutes";
 
-const app = express(); 
+const app = express();
 app.use(express.json());
-app.use(cors())
-app.use(routes)
-app.use(cookieParser())
+app.use(cors());
+app.use(cookieParser());
 
-app.get("/api/users", (req: Request, res: Response) => {
-  res.send("Welcome to Express & TypeScript Server");
-});
-
+app.use(routes);
 
 connectDatabase()
   .then(() =>
