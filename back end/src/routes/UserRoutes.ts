@@ -1,10 +1,18 @@
 import { Router } from "express";
-import { signupUser } from "../controllers/UserController";
-import utils from '../utils/helpers/generateTokenAndCookie'
+import {
+  followUnfollowUser,
+  loginUser,
+  logoutUser,
+  signupUser,
+} from "../controllers/UserController";
+import Auth from "../middlewares/auth";
 
 const routes = Router();
 
-routes.get("/signup", signupUser);
-routes.use()
+routes.post("/signup", signupUser);
+routes.post("/login", loginUser);
+routes.post("/logout", logoutUser);
 
-export default routes
+routes.post("/follow/:id", Auth, followUnfollowUser);
+
+export default routes;

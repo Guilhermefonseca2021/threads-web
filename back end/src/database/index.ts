@@ -11,6 +11,3 @@ const connectDatabase = async () => {
 };
 
 export default connectDatabase;
-
-import { Schema, model, Types } from 'mongoose';
-

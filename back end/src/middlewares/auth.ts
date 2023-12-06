@@ -7,7 +7,11 @@ interface AuthenticatedRequest extends Request {
   userId?: string;
 }
 
-async function Auth(request: AuthenticatedRequest, response: Response, next: NextFunction) {
+async function Auth(
+  request: AuthenticatedRequest,
+  response: Response,
+  next: NextFunction
+) {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -15,13 +19,20 @@ async function Auth(request: AuthenticatedRequest, response: Response, next: Nex
   }
 
   const [, token] = authHeader.split(" ");
-
+  console.log(token);
+  
   try {
-    const decoded: any = await promisify(jwt.verify)(token);
+    const decoded: any = await promisify<string, jwt.Secret>(jwt.verify)(
+      token,
+      auth.secret as string
+    );
+
     request.userId = decoded.id;
-    
+
     return next();
   } catch (error) {
-    return response.status(401).json({ error: "invalid token" })
+    return response.status(401).json({ error: "invalid token" });
   }
 }
+
+export default Auth;
